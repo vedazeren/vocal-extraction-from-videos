@@ -120,7 +120,7 @@ def extract_vocals(link, filename='merged_video'):
         cmds = [["ffmpeg", "-i", "video.mp4", "-ss", beginning_, "-to", end_, "-c", "copy", parts_],
        ["ffmpeg", "-i", parts_, "-codec", "copy", "-an", str("silent_video_" + str(i+1) + ".mp4")],
        ["ffmpeg", "-i", parts_ , "-vn", "-f", "wav", "audio_" + str(i+1) + ".wav"],
-       ["spleeter", "separate", "-i", "audio_" + str(i+1) + ".wav", "-p", "spleeter:2stems", "-o", "myoutput"+str(i+1)],
+       ["python" , "-m", "spleeter", "separate", "-i", "audio_" + str(i+1) + ".wav", "-p", "spleeter:2stems", "-o", "myoutput"+str(i+1)],
        ["ffmpeg", "-i", "silent_video_" + str(i+1) + ".mp4", "-i", "myoutput"+ str(i+1) +"/audio_"+str(i+1)+"/vocals.wav",
         "-c:v", "copy", "-c:a", "aac", "vocals_"+str(i+1)+"_video.mp4"]]
         for cmd in cmds:
