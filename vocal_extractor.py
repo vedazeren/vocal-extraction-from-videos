@@ -3,8 +3,7 @@ from pytube import YouTube
 import subprocess
 import pandas as pd
 import numpy as np
-from datetime import timedelta
-import ffmpeg 
+from datetime import timedelta 
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
 
