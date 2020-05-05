@@ -2,8 +2,7 @@ from pytube import YouTube
 import subprocess
 import pandas as pd
 import numpy as np
-from datetime import timedelta
-import argparse
+from datetime import timedelta 
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
 
@@ -39,7 +38,6 @@ def video_attrs():
         
     nr_of_parts = int(seconds/600) + 1
     return nr_of_parts, duration_of_video
-
 
 def cutting_points(nr_of_parts,duration_of_video):
     
