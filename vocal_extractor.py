@@ -14,6 +14,7 @@ import numpy as np
 from datetime import timedelta
 import ffmpeg 
 import argparse
+from moviepy.video.io.VideoFileClip import VideoFileClip
 
 
 def download_video(source):
