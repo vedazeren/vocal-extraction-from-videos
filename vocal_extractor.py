@@ -37,9 +37,7 @@ def video_attrs():
         duration_of_video (str): The duration of the video in hh:mm:ss format proper for 
         a command line call    
     """
-    seconds = get_ipython().getoutput('python -m ffprobe -v error -select_streams v:0 -show_entries stream=duration -of         default=noprint_wrappers=1:nokey=1 video.mp4')
-    seconds = int(float(seconds[0]))
-    
+    seconds = int(VideoFileClip.duration)
     duration_of_video = timedelta(seconds=seconds)
     if seconds>=3600 and seconds<36000: 
         duration_of_video = '0' + str(duration_of_video)
