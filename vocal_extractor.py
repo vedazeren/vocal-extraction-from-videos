@@ -3,7 +3,6 @@ import subprocess
 import pandas as pd
 import numpy as np
 from datetime import timedelta
-import ffmpeg 
 import argparse
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
@@ -118,11 +117,11 @@ def extract_vocals(link, filename='merged_video'):
         parts_ = parts[i]
         beginning_ = beginning[i]
         end_ = end[i]
-        cmds = [["/srv/conda/envs/notebook/lib/python3.7/site-packages/ffmpeg", "-i", "video.mp4", "-ss", beginning_, "-to", end_, "-c", "copy", parts_],
-       ["/srv/conda/envs/notebook/lib/python3.7/site-packages/ffmpeg", "-i", parts_, "-codec", "copy", "-an", str("silent_video_" + str(i+1) + ".mp4")],
-       ["/srv/conda/envs/notebook/lib/python3.7/site-packages/ffmpeg", "-i", parts_ , "-vn", "-f", "wav", "audio_" + str(i+1) + ".wav"],
+        cmds = [["ffmpeg", "-i", "video.mp4", "-ss", beginning_, "-to", end_, "-c", "copy", parts_],
+       ["ffmpeg", "-i", parts_, "-codec", "copy", "-an", str("silent_video_" + str(i+1) + ".mp4")],
+       ["ffmpeg", "-i", parts_ , "-vn", "-f", "wav", "audio_" + str(i+1) + ".wav"],
        ["spleeter", "separate", "-i", "audio_" + str(i+1) + ".wav", "-p", "spleeter:2stems", "-o", "myoutput"+str(i+1)],
-       ["/srv/conda/envs/notebook/lib/python3.7/site-packages/ffmpeg", "-i", "silent_video_" + str(i+1) + ".mp4", "-i", "myoutput"+ str(i+1) +"/audio_"+str(i+1)+"/vocals.wav",
+       ["ffmpeg", "-i", "silent_video_" + str(i+1) + ".mp4", "-i", "myoutput"+ str(i+1) +"/audio_"+str(i+1)+"/vocals.wav",
         "-c:v", "copy", "-c:a", "aac", "vocals_"+str(i+1)+"_video.mp4"]]
         for cmd in cmds:
             subprocess.run(cmd, stderr=subprocess.STDOUT)
