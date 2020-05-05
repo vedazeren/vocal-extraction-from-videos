@@ -29,9 +29,7 @@ def video_attrs():
         duration_of_video (str): The duration of the video in hh:mm:ss format proper for 
         a command line call    
     """
-    seconds = get_ipython().getoutput('ffprobe -v error -select_streams v:0 -show_entries stream=duration -of         default=noprint_wrappers=1:nokey=1 video.mp4')
-    seconds = int(float(seconds[0]))
-    
+    seconds = int(VideoFileClip("video.mp4").duration)
     duration_of_video = timedelta(seconds=seconds)
     if seconds>=3600 and seconds<36000: 
         duration_of_video = '0' + str(duration_of_video)
@@ -42,7 +40,6 @@ def video_attrs():
         
     nr_of_parts = int(seconds/600) + 1
     return nr_of_parts, duration_of_video
-
 
 def cutting_points(nr_of_parts,duration_of_video):
     
