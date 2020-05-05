@@ -38,7 +38,7 @@ def video_attrs():
         duration_of_video (str): The duration of the video in hh:mm:ss format proper for 
         a command line call    
     """
-    seconds = int(VideoFileClip.duration)
+    seconds = int(VideoFileClip("video.mp4"))
     duration_of_video = timedelta(seconds=seconds)
     if seconds>=3600 and seconds<36000: 
         duration_of_video = '0' + str(duration_of_video)
